@@ -39,7 +39,12 @@ end
 
 def count_words(str)
   #Once again, downcase and remove non word characters
-  wordArray = str.downcase.gsub(/[^a-z\s]/,'').split(/\s/)
+  wordArray = str.downcase.gsub(/[^a-z ]/,'').split(/\s/)
+  wordArray.each do |x|
+    if x =~ /\A[^a-z]*\z/
+      wordArray.delete_at(wordArray.index(x))
+    end
+  end
   hashToReturn = {}
   wordArray.each { |x|
     if hashToReturn.key?(x)
@@ -91,6 +96,12 @@ word_count = count_words test_str
 puts word_count
 
 test_str = "one two three two three four three four five four five four five five five"
+puts test_str
+word_count = count_words test_str
+puts word_count
+
+
+test_str = "A man, a plan, a canal -- Panama"
 puts test_str
 word_count = count_words test_str
 puts word_count
