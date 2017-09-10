@@ -25,11 +25,33 @@
 #instructions specified in the assignment description to hand-in your work.
 
 def palindrome?(str)
-  # YOUR CODE HERE
+  #Remove non word characters and downcase the string
+  tmp = str.downcase.gsub(/\W/, '')
+
+  #If reverse is equal to normal, then you have a palindrome
+  if tmp.reverse == tmp
+    return true
+  else
+    return false
+  end
+
 end
 
 def count_words(str)
-  # YOUR CODE HERE
+  #Once again, downcase and remove non word characters
+  wordArray = str.downcase.gsub(/[^a-z\s]/,'').split(/\s/)
+  hashToReturn = {}
+  wordArray.each { |x|
+    if hashToReturn.key?(x)
+      #If the hash contains the key, increment the associated value
+      hashToReturn[x] += 1
+    else
+      #If the hash doesn't contain the key, add the key to the hash
+      hashToReturn[x] = 1
+    end
+
+  }
+  return hashToReturn
 end
 
 
@@ -46,6 +68,14 @@ else
 end
 
 
+test_str = "A man, a plan, a canal -- Panama"
+
+if palindrome? test_str
+  puts test_str + " is a palindrome!"
+else
+  puts test_str + " is NOT a palindrome!"
+end
+
 test_str = "Madam, I'm Adam"
 
 if palindrome? test_str
@@ -56,6 +86,11 @@ end
 
 
 test_str = "The rent is due on the first day of the month unless the first day of the month falls on a Saturday or Sunday"
+puts test_str
+word_count = count_words test_str
+puts word_count
 
+test_str = "one two three two three four three four five four five four five five five"
+puts test_str
 word_count = count_words test_str
 puts word_count
