@@ -8,11 +8,8 @@ class Class
 
     class_eval %Q"
       def #{attr_name}= newValue
-        if defined? @#{attr_name_history}
-          @#{attr_name_history} << newValue
-        else
-          @#{attr_name_history} = [newValue]
-        end
+        @#{attr_name_history} ||= [nil]
+        @#{attr_name_history} << newValue
         @#{attr_name} = newValue
       end
     "
@@ -23,8 +20,7 @@ end
 class TestClass
   attr_accessor_with_history :value
 
-  def initialize(value)
-    @value = value
+  def initialize
   end
 
 
@@ -36,7 +32,7 @@ class TestClass
 end
 
 
-example = TestClass.new(5)
+example = TestClass.new
 example.value = 12
 example.value = 25
 example.value = 14
