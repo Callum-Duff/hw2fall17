@@ -37,10 +37,14 @@ def rps_game_winner(game)
 end
 
 def rps_tournament_winner(tournament)
-  # YOUR CODE HERE
+  if tournament[0][0].kind_of?(String)
+    return rps_game_winner([tournament[0], tournament[1]])
+  else
+    #return rps_tournament_winner(rps_game_winner(tournament[0])
+    return rps_game_winner([rps_tournament_winner(tournament[0]), rps_tournament_winner(tournament[1])])
+  end
+  
 end
 
 
 
-
-#feel free to add your own helper functions as needed
