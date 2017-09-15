@@ -30,11 +30,3 @@ class TestClass
   end
 
 end
-
-
-example = TestClass.new
-example.value = 12
-example.value = 25
-example.value = 14
-puts 'Printing history:'
-example.printHistory
